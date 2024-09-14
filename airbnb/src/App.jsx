@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
 import { Button } from "../src/components/ui/button";
+import './App.css'
 import {
   Card,
   CardContent,
@@ -75,7 +76,7 @@ export default function App() {
   };
 
   return (
-    <div>
+    <div className="App">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-8">
         <h1 className="text-2xl font-semibold mb-4">
