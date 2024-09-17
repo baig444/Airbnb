@@ -1,47 +1,73 @@
-import React, { useState } from 'react'
-import { Button } from "./ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
-import { Calendar } from "./ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
-import { Badge } from "./ui/badge"
-import { Separator } from "./ui/separator"
-import { ScrollArea } from "./ui/scroll-area"
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog"
-import { Star, Heart, Share, Award, MapPin, CalendarIcon, Users, Wifi, Tv, Car, Utensils, Coffee, Sparkles, X, ChevronLeft, ChevronRight } from 'lucide-react'
-import Navbar from './Navbar'
-import MapComponent from './MapComponent'
+/* eslint-disable react/no-unescaped-entities */
+import { useState } from "react";
+import { Button } from "./ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Calendar } from "./ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Badge } from "./ui/badge";
+import { Separator } from "./ui/separator";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import {
+  Star,
+  Heart,
+  Share,
+  CalendarIcon,
+  Users,
+  Wifi,
+  Tv,
+  Car,
+  Utensils,
+  Coffee,
+  Sparkles,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import MapComponent from "./MapComponent";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./ui/accordion";
 
 export default function ModernHotelDetailPage() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [galleryOpen, setGalleryOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [galleryOpen, setGalleryOpen] = useState(false);
   const images = [
-  "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/5013ce9d-3f4a-42fc-b430-d3adefaea9c0.jpeg?im_w=960",
+    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/5013ce9d-3f4a-42fc-b430-d3adefaea9c0.jpeg?im_w=960",
     "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/68069e84-2dfa-458b-ba7c-26333d48124e.jpeg?im_w=720",
     "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/8ebcd5ed-ef52-4d31-ba7d-823e53d2e59c.jpeg?im_w=720",
     "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/4bcbd058-7847-4996-b2dd-6d8a2ae67d34.jpeg?im_w=720",
     "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/43ff1f44-45fa-499f-b171-abe267c20fc0.jpeg?im_w=720",
-  ]
+  ];
 
   const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
-  }
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
-  }
+    setCurrentImageIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
+  };
 
   return (
     <div className="App bg-gray-50 min-h-screen">
-      <Navbar/>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
               <div className="relative aspect-video">
-                <img 
-                  src={images[currentImageIndex]} 
+                <img
+                  src={images[currentImageIndex]}
                   alt={`Property image ${currentImageIndex + 1}`}
                   className="w-full h-full object-cover"
                 />
@@ -52,7 +78,9 @@ export default function ModernHotelDetailPage() {
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
                         className={`w-2 h-2 rounded-full ${
-                          index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                          index === currentImageIndex
+                            ? "bg-white"
+                            : "bg-white/50"
                         }`}
                       />
                     ))}
@@ -100,7 +128,9 @@ export default function ModernHotelDetailPage() {
                               key={index}
                               onClick={() => setCurrentImageIndex(index)}
                               className={`w-2 h-2 rounded-full ${
-                                index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                                index === currentImageIndex
+                                  ? "bg-white"
+                                  : "bg-white/50"
                               }`}
                             />
                           ))}
@@ -113,8 +143,12 @@ export default function ModernHotelDetailPage() {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h1 className="text-3xl font-bold mb-2">Luxurious Beachfront Villa</h1>
-                    <p className="text-gray-600">Malibu, California, United States</p>
+                    <h1 className="text-3xl font-bold mb-2">
+                      Luxurious Beachfront Villa
+                    </h1>
+                    <p className="text-gray-600">
+                      Malibu, California, United States
+                    </p>
                   </div>
                   <div className="flex items-center space-x-4">
                     <Button variant="outline" size="icon">
@@ -126,7 +160,9 @@ export default function ModernHotelDetailPage() {
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 mb-6">
-                  <Badge variant="secondary">Superhost</Badge>
+                  <p className="text-gray-500">
+                    2 guests · 1 bedrooms · 1 beds · 2 baths
+                  </p>
                   <div className="flex items-center">
                     <Star className="h-4 w-4 text-yellow-400 mr-1" />
                     <span className="font-semibold">4.98</span>
@@ -135,13 +171,20 @@ export default function ModernHotelDetailPage() {
                 </div>
                 <div className="space-y-6">
                   <div>
-                    <h2 className="text-xl font-semibold mb-4">About this place</h2>
+                    <h2 className="text-xl font-semibold mb-4">
+                      About this place
+                    </h2>
                     <p className="text-gray-600">
-                      Escape to this stunning beachfront villa for a luxurious getaway. With breathtaking ocean views, private beach access, and top-notch amenities, this property offers the perfect blend of relaxation and indulgence.
+                      Escape to this stunning beachfront villa for a luxurious
+                      getaway. With breathtaking ocean views, private beach
+                      access, and top-notch amenities, this property offers the
+                      perfect blend of relaxation and indulgence.
                     </p>
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold mb-4">What this place offers</h2>
+                    <h2 className="text-xl font-semibold mb-4">
+                      What this place offers
+                    </h2>
                     <div className="grid grid-cols-2 gap-4">
                       {[
                         { icon: Wifi, label: "Wifi" },
@@ -151,7 +194,10 @@ export default function ModernHotelDetailPage() {
                         { icon: Coffee, label: "Coffee maker" },
                         { icon: Sparkles, label: "Pool" },
                       ].map((amenity, index) => (
-                        <div key={index} className="flex items-center space-x-2">
+                        <div
+                          key={index}
+                          className="flex items-center space-x-2"
+                        >
                           <amenity.icon className="h-5 w-5 text-gray-400" />
                           <span>{amenity.label}</span>
                         </div>
@@ -165,19 +211,53 @@ export default function ModernHotelDetailPage() {
           <div className="lg:col-span-1">
             <Card className="sticky top-8">
               <CardHeader>
-                <CardTitle className="text-3xl font-bold">$350 <span className="text-lg font-normal text-gray-500">night</span></CardTitle>
+                <CardTitle className="text-3xl font-bold">
+                  $350{" "}
+                  <span className="text-lg font-normal text-black">night</span>
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="dates" className="w-full">
-                  <TabsList className="grid w-full grid-cols-2">
+                  <div className="flex flex-col gap-2">
+                    <div>
+                      <label htmlFor="name">Name</label>
+                      <input
+                        type="text"
+                        placeholder="Enter your name"
+                        className="w-full p-2 border-b border-gray-400 outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="name" className="mt-4">
+                        Email
+                      </label>
+
+                      <input
+                        type="email"
+                        placeholder="Enter your email"
+                        className="w-full p-2 border-b border-gray-400 outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="name">Phone</label>
+                      <input
+                        type="text"
+                        placeholder="Enter your name"
+                        className="w-full p-2 border-b border-gray-400  outline-none"
+                      />
+                    </div>
+                  </div>
+                  <TabsList className="grid w-full grid-cols-1 mt-4">
                     <TabsTrigger value="dates">Dates</TabsTrigger>
-                    <TabsTrigger value="months">Months</TabsTrigger>
                   </TabsList>
                   <TabsContent value="dates">
                     <div className="space-y-4">
                       <Popover>
                         <PopoverTrigger asChild>
-                          <Button variant="outline" className="w-full justify-start text-left font-normal">
+                          <Button
+                            variant="outline"
+                            className="w-full justify-start text-left font-normal"
+                          >
                             <CalendarIcon className="mr-2 h-4 w-4" />
                             Check in - Check out
                           </Button>
@@ -188,9 +268,11 @@ export default function ModernHotelDetailPage() {
                       </Popover>
                       <Popover>
                         <PopoverTrigger asChild>
-                          <Button variant="outline" className="w-full justify-start text-left font-normal">
-                            <Users className="mr-2 h-4 w-4" />
-                            2 guests
+                          <Button
+                            variant="outline"
+                            className="w-full justify-start text-left font-normal"
+                          >
+                            <Users className="mr-2 h-4 w-4" />2 guests
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-80">
@@ -198,24 +280,36 @@ export default function ModernHotelDetailPage() {
                             <div className="flex items-center justify-between">
                               <div>
                                 <h4 className="font-semibold">Adults</h4>
-                                <p className="text-sm text-gray-500">Ages 13 or above</p>
+                                <p className="text-sm text-gray-500">
+                                  Ages 13 or above
+                                </p>
                               </div>
                               <div className="flex items-center space-x-2">
-                                <Button variant="outline" size="icon">-</Button>
+                                <Button variant="outline" size="icon">
+                                  -
+                                </Button>
                                 <span>1</span>
-                                <Button variant="outline" size="icon">+</Button>
+                                <Button variant="outline" size="icon">
+                                  +
+                                </Button>
                               </div>
                             </div>
                             <Separator />
                             <div className="flex items-center justify-between">
                               <div>
                                 <h4 className="font-semibold">Children</h4>
-                                <p className="text-sm text-gray-500">Ages 2-12</p>
+                                <p className="text-sm text-gray-500">
+                                  Ages 2-12
+                                </p>
                               </div>
                               <div className="flex items-center space-x-2">
-                                <Button variant="outline" size="icon">-</Button>
+                                <Button variant="outline" size="icon">
+                                  -
+                                </Button>
                                 <span>0</span>
-                                <Button variant="outline" size="icon">+</Button>
+                                <Button variant="outline" size="icon">
+                                  +
+                                </Button>
                               </div>
                             </div>
                           </div>
@@ -232,26 +326,78 @@ export default function ModernHotelDetailPage() {
               </CardContent>
               <CardFooter className="flex flex-col">
                 <Button className="w-full mb-4">Reserve</Button>
-                <p className="text-center text-sm text-gray-500">You won't be charged yet</p>
               </CardFooter>
             </Card>
           </div>
         </div>
-        
+
         <div className="mt-12 bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-bold mb-6">Location</h2>
             <div className="aspect-video rounded-xl overflow-hidden mb-4">
-              <MapComponent/>
+              <MapComponent />
+              <div className="pt-10">
+              <div>
+            <h1 className="text-3xl font-semibold">Nearby Location</h1>
+            <div className="mt-4 mb-9 flex items-center gap-5">
+              <div className="bg-gray-100 w-fit p-4 rounded-md">
+                <h1 className="text-md font-semibold">DLF Cyberhub</h1>
+                <p className="text-xs font-medium">500m away</p>
+              </div>
+              <div className="bg-gray-100 w-fit p-4 rounded-md">
+                <h1 className="text-md font-semibold">DLF Cyberhub</h1>
+                <p className="text-xs font-medium">500m away</p>
+              </div>
+              <div className="bg-gray-100 w-fit p-4 rounded-md">
+                <h1 className="text-md font-semibold">DLF Cyberhub</h1>
+                <p className="text-xs font-medium">500m away</p>
+              </div>
             </div>
-            <h3 className="font-semibold text-lg mb-2">Malibu, California, United States</h3>
+          </div>
+              </div>
+            </div>
+            <h3 className="font-semibold text-lg mb-2">
+              Malibu, California, United States
+            </h3>
             <p className="text-gray-600 mb-4">
-              Located in the heart of Malibu, this beachfront villa offers easy access to pristine beaches, world-class restaurants, and scenic hiking trails. The property is just a short drive from popular attractions like the Getty Villa and Pepperdine University.
+              Located in the heart of Malibu, this beachfront villa offers easy
+              access to pristine beaches, world-class restaurants, and scenic
+              hiking trails. The property is just a short drive from popular
+              attractions like the Getty Villa and Pepperdine University.
             </p>
             <Button variant="outline">Show more</Button>
           </div>
         </div>
+        <div className="grid grid-cols-1 gap-4 mt-12 p-10 bg-white rounded-xl shadow-lg">
+          <h1 className="text-2xl font-bold">FAQS</h1>
+          <Accordion type="single" collapsible>
+            <AccordionItem value="item-1">
+              <AccordionTrigger><h3 className="font-semibold text-lg">
+              Malibu, California, United States
+            </h3></AccordionTrigger>
+              <AccordionContent>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger><h3 className="font-semibold text-lg">
+              Malibu, California, United States
+            </h3></AccordionTrigger>
+              <AccordionContent>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger><h3 className="font-semibold text-lg">
+              Malibu, California, United States
+            </h3></AccordionTrigger>
+              <AccordionContent>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
       </div>
     </div>
-  )
+  );
 }
