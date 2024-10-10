@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import {
   Card,
@@ -58,16 +58,14 @@ import {
     AccordionItem,
     AccordionTrigger,
   } from "./ui/accordion";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function LongStay() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/5013ce9d-3f4a-42fc-b430-d3adefaea9c0.jpeg?im_w=960",
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/68069e84-2dfa-458b-ba7c-26333d48124e.jpeg?im_w=720",
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/8ebcd5ed-ef52-4d31-ba7d-823e53d2e59c.jpeg?im_w=720",
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/4bcbd058-7847-4996-b2dd-6d8a2ae67d34.jpeg?im_w=720",
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/43ff1f44-45fa-499f-b171-abe267c20fc0.jpeg?im_w=720",
-  ];
+  const [images,setImages] = useState([])
+  const { id } = useParams();
+  const [property, setProperty] = useState(null);
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -79,18 +77,38 @@ export default function LongStay() {
     );
   };
 
+  useEffect(() => {
+    const  getroomsbyid = async () => {
+      try {
+        const res = await axios.get(`http://localhost:9000/api/getroom/${id}`)
+
+        const data = res.data
+        console.log(data)
+        setProperty(data);
+        setImages(data.images || []);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getroomsbyid()
+  }, [id]);
+
+  if (!property) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="App">
+    <div className="main-content">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-8">
         <h1 className="text-2xl font-semibold mb-4">
-          Highrise Heaven 16th Floor with Garden Patio 3
+          {property.name}
         </h1>
 
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <Star className="h-4 w-4 text-pink-500 mr-1" />
-              <span className="font-semibold">4.98</span>
+              <span className="font-semibold">{property.rating}</span>
               <span className="text-gray-500 ml-1">·</span>
             </div>
             <span className="font-semibold underline">124 reviews</span>
@@ -108,47 +126,48 @@ export default function LongStay() {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-2 mb-8">
-          <div className="col-span-2 row-span-2">
-            <img
-              src={images[0]}
-              alt="Main property image"
-              className="w-full h-[55vh] object-cover rounded-l-xl"
-            />
+        {images.length > 0 && (
+          <div className="relative grid grid-cols-4 gap-2 mb-8">
+            <div className="col-span-2 row-span-2">
+              <img
+                src={images[currentImageIndex]}
+                alt="Main property image"
+                className="w-full h-[55vh] object-cover rounded-l-xl"
+              />
+            </div>
+            {images.slice(1, 5).map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Property image ${index + 2}`}
+                className={`w-full h-[26.5vh] object-cover ${
+                  index === 3
+                    ? "rounded-br-lg"
+                    : index === 1
+                    ? "rounded-tr-lg"
+                    : ""
+                }`}
+              />
+            ))}
+            <Button
+              variant="secondary"
+              size="sm"
+              className="absolute bottom-[-10%] right-14"
+            >
+              Show all photos
+            </Button>
           </div>
-          {images.slice(1, 5).map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Property image ${index + 2}`}
-              className={`w-full h-[26.5vh] object-cover ${
-                index === 3
-                  ? "rounded-br-lg"
-                  : index === 1
-                  ? "rounded-tr-lg"
-                  : ""
-              }`}
-            />
-          ))}
-          <Button
-            variant="secondary"
-            size="sm"
-            className="absolute bottom-[-10%] right-14"
-          >
-            Show all photos
-          </Button>
-        </div>
-
+        )}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="md:col-span-2">
             <div className="flex items-center justify-between pb-6 border-b">
               <div>
                 <h2 className="text-2xl font-semibold">
-                  Entire rental unit in Gurugram, India
+                  {property.location}
                 </h2>
               </div>
               <h1 className="text-xl font-semibold mb-5">
-                Price starting from - ₹10,000
+                Price starting from - ${property.price}
               </h1>
             </div>
 
@@ -205,17 +224,10 @@ export default function LongStay() {
             <div className="py-8 border-b">
               <h2 className="text-2xl font-semibold mb-4">About this place</h2>
               <p className="text-gray-500 mb-4">
-                Escape to this stunning beachfront villa for a luxurious
-                getaway. With breathtaking ocean views, private beach access,
-                and top-notch amenities, this property offers the perfect blend
-                of relaxation and indulgence.
+                {property.about}
               </p>
               <p className="text-gray-500 mb-4">
-                This spacious villa features 3 bedrooms, 2.5 bathrooms, a fully
-                equipped gourmet kitchen, and an expansive living area with
-                floor-to-ceiling windows overlooking the Pacific Ocean. Step
-                outside onto the private terrace to enjoy alfresco dining,
-                sunbathing, or stargazing.
+               {property.about}
               </p>
               <Button variant="link" className="p-0 text-black font-semibold">
                 Show more
@@ -288,13 +300,10 @@ export default function LongStay() {
             <div className="mt-10">
               <h1 className="text-3xl font-semibold">More About </h1>
               <h1 className="text-md mt-4">
-                Entire rental unit in Gurugram, India
+                {property.location}
               </h1>
               <h1 className="text-md mt-4">
-                Escape to this stunning beachfront villa for a luxurious
-                getaway. With breathtaking ocean views, private beach access,
-                and top-notch amenities, this property offers the perfect blend
-                of relaxation and indulgence.
+               {property.about}
               </h1>
             </div>
           </div>

@@ -15,6 +15,41 @@
   src: url("./roboto-flex-latin.woff2");
 
 }
+
+@font-face {
+  font-family: Mazius;
+  src: url('./Mazius.otf');
+}
 .App{
   font-family: matter;
+}
+
+/* .hero{
+  background-image: url('https://plus.unsplash.com/premium_photo-1675745329378-5573c360f69f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
+/* .hero{
+  background-image: url('https://images.unsplash.com/photo-1621693722835-44c9dcb724fd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
+.hero{
+  background-image: url('https://images.unsplash.com/photo-1679364297777-1db77b6199be?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+}
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+.main-content{
+  padding-top: 70px;
 }

@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Cozy Downtown Apartment",
+    "imageUrl": [
+      "https://images.unsplash.com/photo-1549294413-26f195200c16?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1549294413-26f195200c16?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ],
+    "location": "New York, United States",
+    "rating": 4.92,
+    "allowance": "2 guests. 1 bedrooms. 1 bed. 1 bath.",
+    "about": "Escape to this stunning beachfront villa for a luxurious getaway. With breathtaking ocean views, private beach access, and top-notch amenities, this property offers the perfect blend of relaxation and indulgence",
+    "price": 120
+  },
+  {
+    "id": 2,
+    "name": "Modern Loft",
+    "imageUrl": [
+      "https://images.unsplash.com/photo-1533740877702-3aeaf8c84376?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1533740877702-3aeaf8c84376?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1533740877702-3aeaf8c84376?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1533740877702-3aeaf8c84376?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1533740877702-3aeaf8c84376?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ],
+    "location": "London, United Kingdom",
+    "rating": 4.85,
+    "price": 150,
+    "allowance": "2 guests. 1 bedrooms. 1 bed. 1 bath.",
+    "about": "Escape to this stunning beachfront villa for a luxurious getaway. With breathtaking ocean views, private beach access, and top-notch amenities, this property offers the perfect blend of relaxation and indulgence"
+  },
+  {
+    "id": 3,
+    "name": "Burj Al Arab",
+    "imageUrl": [
+      "https://images.unsplash.com/photo-1705412082002-6d7200fa10ba?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1705412082002-6d7200fa10ba?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1705412082002-6d7200fa10ba?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1705412082002-6d7200fa10ba?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1705412082002-6d7200fa10ba?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ],
+    "location": "Dubai, United Arab Emirates",
+    "rating": 4.95,
+    "price": 1500,
+    "allowance": "2 guests. 1 bedrooms. 1 bed. 1 bath.",
+    "about": "Escape to this stunning beachfront villa for a luxurious getaway. With breathtaking ocean views, private beach access, and top-notch amenities, this property offers the perfect blend of relaxation and indulgence"
+  }
+]

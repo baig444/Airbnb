@@ -2,17 +2,20 @@ import { Button } from "./ui/button"
 import {Link} from "react-router-dom"
 
 const Navbar = () => {
+  if (location.pathname === "/" || location.pathname === "/dashboard" || location.pathname === "/auth") {
+    return null;
+  }
   return (
-    <div>
-      <header className="border-b px-10">
+    <div className="absolute top-0 left-0 z-10 w-full">
+      <header className="px-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="text-rose-500 text-2xl font-bold"><img src="./Logo.png" alt="logo" width="60" height="60" className="inline-block" /></div>
-          <nav className="hidden md:flex space-x-4">
-            <a href="#" className="text-gray-500 hover:text-gray-700">Become a host</a>
-            <a href="#" className="text-gray-500 hover:text-gray-700">Help</a>
-            <a href="#" className="text-gray-500 hover:text-gray-700">Sign up</a>
-            <a href="#" className="text-gray-500 hover:text-gray-700">Log in</a>
-            <Link to='/Shortstay'>Shortstay</Link>
+        {/* <img src="./night.png" alt="logo" width="150" height="90" className="inline-block object-cover" /> */}
+          <h1 className={`text-3xl font-bold font-[Mazius] ${location.pathname === "/explore/shortstay" || location.pathname === "/explore/longstay" ? "text-white" : "text-black"}`}>Night Suites</h1>
+          <nav className={`hidden md:flex space-x-4 font-semibold ${location.pathname === "/explore/shortstay" || location.pathname === "/explore/longstay" ? "text-white" : "text-black"}`}>
+            <a href="#">Become a host</a>
+            <a href="#" >Help</a>
+            <a href="#" >Sign up</a>
+            <a href="#">Log in</a>
             <Link to='/properties'>PropertiesList</Link>
           </nav>
           <Button variant="ghost" className="md:hidden">

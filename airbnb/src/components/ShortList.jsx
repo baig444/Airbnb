@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -11,7 +11,6 @@ import {
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import {
@@ -37,18 +36,35 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function ModernHotelDetailPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
-  const images = [
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/5013ce9d-3f4a-42fc-b430-d3adefaea9c0.jpeg?im_w=960",
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/68069e84-2dfa-458b-ba7c-26333d48124e.jpeg?im_w=720",
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/8ebcd5ed-ef52-4d31-ba7d-823e53d2e59c.jpeg?im_w=720",
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/4bcbd058-7847-4996-b2dd-6d8a2ae67d34.jpeg?im_w=720",
-    "https://a0.muscache.com/im/pictures/hosting/Hosting-1196141205624875008/original/43ff1f44-45fa-499f-b171-abe267c20fc0.jpeg?im_w=720",
-  ];
+  const [images,setImages] = useState([])
+  const { id } = useParams();
+  const [property, setProperty] = useState(null);
+  const [checkin, setcheckin] = useState('');
+  useEffect(() => {
+    const  getroomsbyid = async () => {
+      try {
+        const res = await axios.get(`http://localhost:9000/api/getroom/${id}`)
 
+        const data = res.data
+        console.log(data)
+        setProperty(data);
+        setImages(data.images || []);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getroomsbyid()
+  }, [id]);
+
+  if (!property) {
+    return <div>Loading...</div>;
+  }
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
@@ -65,6 +81,7 @@ export default function ModernHotelDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            {images?.length > 0 && (
               <div className="relative aspect-video">
                 <img
                   src={images[currentImageIndex]}
@@ -140,14 +157,16 @@ export default function ModernHotelDetailPage() {
                   </Dialog>
                 </div>
               </div>
+            )}
+              
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h1 className="text-3xl font-bold mb-2">
-                      Luxurious Beachfront Villa
+                      {property.name}
                     </h1>
                     <p className="text-gray-600">
-                      Malibu, California, United States
+                      {property.location}
                     </p>
                   </div>
                   <div className="flex items-center space-x-4">
@@ -161,11 +180,11 @@ export default function ModernHotelDetailPage() {
                 </div>
                 <div className="flex items-center space-x-4 mb-6">
                   <p className="text-gray-500">
-                    2 guests · 1 bedrooms · 1 beds · 2 baths
+                   {property.allowance}
                   </p>
                   <div className="flex items-center">
                     <Star className="h-4 w-4 text-yellow-400 mr-1" />
-                    <span className="font-semibold">4.98</span>
+                    <span className="font-semibold">{property.rating}</span>
                     <span className="text-gray-500 ml-1">(124 reviews)</span>
                   </div>
                 </div>
@@ -175,10 +194,7 @@ export default function ModernHotelDetailPage() {
                       About this place
                     </h2>
                     <p className="text-gray-600">
-                      Escape to this stunning beachfront villa for a luxurious
-                      getaway. With breathtaking ocean views, private beach
-                      access, and top-notch amenities, this property offers the
-                      perfect blend of relaxation and indulgence.
+                      {property.about}
                     </p>
                   </div>
                   <div>
@@ -212,7 +228,7 @@ export default function ModernHotelDetailPage() {
             <Card className="sticky top-8">
               <CardHeader>
                 <CardTitle className="text-3xl font-bold">
-                  $350{" "}
+                  ${property.price}{" "}
                   <span className="text-lg font-normal text-black">night</span>
                 </CardTitle>
               </CardHeader>
@@ -263,7 +279,10 @@ export default function ModernHotelDetailPage() {
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar mode="range" numberOfMonths={2} />
+                          <Calendar
+                           selected={checkin}
+                           onSelect={setcheckin}
+                          mode="range" numberOfMonths={2} />
                         </PopoverContent>
                       </Popover>
                       <Popover>
@@ -357,13 +376,10 @@ export default function ModernHotelDetailPage() {
               </div>
             </div>
             <h3 className="font-semibold text-lg mb-2">
-              Malibu, California, United States
+             {property.location}
             </h3>
             <p className="text-gray-600 mb-4">
-              Located in the heart of Malibu, this beachfront villa offers easy
-              access to pristine beaches, world-class restaurants, and scenic
-              hiking trails. The property is just a short drive from popular
-              attractions like the Getty Villa and Pepperdine University.
+             {property.about}
             </p>
             <Button variant="outline">Show more</Button>
           </div>
